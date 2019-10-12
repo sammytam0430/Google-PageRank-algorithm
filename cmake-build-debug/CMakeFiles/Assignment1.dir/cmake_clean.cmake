@@ -1,8 +1,9 @@
 file(REMOVE_RECURSE
+  "Assignment1.exe"
+  "Assignment1.pdb"
+  "CMakeFiles/Assignment1.dir/googlePageRank.cpp.o"
   "CMakeFiles/Assignment1.dir/main.cpp.o"
   "CMakeFiles/Assignment1.dir/matrix.cpp.o"
-  "Assignment1.pdb"
-  "Assignment1.exe"
   "libAssignment1.dll.a"
 )
 

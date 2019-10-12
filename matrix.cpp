@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 #include "matrix.hpp"
 
 Matrix::Matrix() {
@@ -48,7 +49,7 @@ void Matrix::set_value(int r, int c, double val) {
     matrix[r][c] = val;
 }
 
-double Matrix::get_value(int r, int c) {
+double Matrix::get_value(int r, int c) const {
     if (r < 0 || c < 0)
         throw invalid_argument("Index cannot be negative");
     if (r >= row || c >= col)
@@ -60,9 +61,9 @@ void Matrix::clear() {
     matrix.resize(row, vector<double>(col, 0.0));
 }
 
-Matrix::~Matrix(){}
+Matrix::~Matrix() {}
 
-ostream& operator<<(ostream& os, const Matrix& obj) {
+ostream &operator<<(ostream &os, const Matrix &obj) {
     for (int r = 0; r < obj.row; ++r) {
         for (int c = 0; c < obj.col; ++c)
             os << obj.matrix[r][c] << "\t";
@@ -72,9 +73,9 @@ ostream& operator<<(ostream& os, const Matrix& obj) {
 }
 
 bool operator==(const Matrix &lhs, const Matrix &rhs) {
-    if(lhs.row != rhs.row && lhs.col != rhs.col)
+    if (lhs.row != rhs.row && lhs.col != rhs.col)
         return false;
-    for (int r = 0; r < lhs.row ; ++r)
+    for (int r = 0; r < lhs.row; ++r)
         for (int c = 0; c < lhs.col; ++c)
             if (lhs.matrix[r][c] - rhs.matrix[r][c] > 0.01)
                 return false;
@@ -111,20 +112,20 @@ Matrix Matrix::operator--(int) {
     return tmp;
 }
 
-Matrix& Matrix::operator=(Matrix rhs) {
+Matrix &Matrix::operator=(Matrix rhs) {
     matrixSwap(*this, rhs);
     return *this;
 }
 
-void Matrix::matrixSwap(Matrix& lhs, Matrix& rhs) {
+void Matrix::matrixSwap(Matrix &lhs, Matrix &rhs) {
 //    lhs.matrix.resize(rhs.row, vector<double>(rhs.col, 0));
     for (int r = 0; r < lhs.row; ++r)
         for (int c = 0; c < lhs.col; ++c)
             lhs.matrix[r][c] = rhs.matrix[r][c];
 }
 
-Matrix& Matrix::operator+=(const Matrix &rhs) {
-    if(this->row != rhs.row && this->col != rhs.col)
+Matrix &Matrix::operator+=(const Matrix &rhs) {
+    if (this->row != rhs.row && this->col != rhs.col)
         throw invalid_argument("Two Matrices must be the same size");
     for (int r = 0; r < this->row; ++r)
         for (int c = 0; c < this->col; ++c)
@@ -137,8 +138,8 @@ Matrix operator+(Matrix lhs, Matrix &rhs) {
     return lhs;
 }
 
-Matrix& Matrix::operator-=(const Matrix &rhs) {
-    if(this->row != rhs.row && this->col != rhs.col)
+Matrix &Matrix::operator-=(const Matrix &rhs) {
+    if (this->row != rhs.row && this->col != rhs.col)
         throw invalid_argument("Two Matrices must be the same size");
     for (int r = 0; r < this->row; ++r)
         for (int c = 0; c < this->col; ++c)
@@ -147,12 +148,12 @@ Matrix& Matrix::operator-=(const Matrix &rhs) {
 }
 
 Matrix operator-(Matrix lhs, Matrix &rhs) {
-    lhs += rhs;
+    lhs -= rhs;
     return lhs;
 }
 
-Matrix& Matrix::operator*=(const Matrix &rhs) {
-    if(this->col != rhs.row)
+Matrix &Matrix::operator*=(const Matrix &rhs) {
+    if (this->col != rhs.row)
         throw invalid_argument("Column of first matrix and row of second matrix must be the same size");
     Matrix product = Matrix();
     product.matrix.resize(this->row, vector<double>(rhs.col, 0));

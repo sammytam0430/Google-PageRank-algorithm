@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/Users/sammy/CLionProjects/Assignment1/googlePageRank.cpp">
+			<Option target="Assignment1"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/sammy/CLionProjects/Assignment1/googlePageRank.hpp">
+			<Option target="Assignment1"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/sammy/CLionProjects/Assignment1/main.cpp">
 			<Option target="Assignment1"/>
 		</Unit>

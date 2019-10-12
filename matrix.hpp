@@ -16,28 +16,50 @@ private:
     int col = 0;
 public:
     Matrix();
-    Matrix(int n);
-    Matrix(int r, int c);
-    Matrix(vector<double> v);
-    void set_value(int r, int c, double val);
-    double get_value(int r, int c);
+
+    Matrix(int);
+
+    Matrix(int, int);
+
+    Matrix(vector<double>);
+
+    void set_value(int, int, double);
+
+    double get_value(int, int) const;
+
     void clear();
+
     ~Matrix();
-    friend ostream& operator<<(ostream& os, const Matrix& matrix);
-    friend bool operator==(const Matrix& lhs, const Matrix& rhs);
-    friend bool operator!=(const Matrix& lhs, const Matrix& rhs);
-    Matrix& operator++();
+
+    friend ostream &operator<<(ostream &, const Matrix &);
+
+    friend bool operator==(const Matrix &, const Matrix &);
+
+    friend bool operator!=(const Matrix &, const Matrix &);
+
+    Matrix &operator++();
+
     Matrix operator++(int);
-    Matrix& operator--();
+
+    Matrix &operator--();
+
     Matrix operator--(int);
-    Matrix& operator=(Matrix rhs);
-    void matrixSwap(Matrix& lhs, Matrix& rhs);
-    Matrix& operator+=(const Matrix& rhs);
-    friend Matrix operator+(Matrix lhs, Matrix& rhs);
-    Matrix& operator-=(const Matrix& rhs);
-    friend Matrix operator-(Matrix lhs, Matrix& rhs);
-    Matrix& operator*=(const Matrix& rhs);
-    friend Matrix operator*(Matrix lhs, Matrix& rhs);
+
+    Matrix &operator=(Matrix);
+
+    void matrixSwap(Matrix &, Matrix &);
+
+    Matrix &operator+=(const Matrix &);
+
+    friend Matrix operator+(Matrix, Matrix &);
+
+    Matrix &operator-=(const Matrix &);
+
+    friend Matrix operator-(Matrix, Matrix &);
+
+    Matrix &operator*=(const Matrix &);
+
+    friend Matrix operator*(Matrix, Matrix &);
 };
 
 #endif //ASSIGNMENT1_MATRIX_HPP
