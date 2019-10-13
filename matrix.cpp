@@ -6,6 +6,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
+#include <iomanip>
 #include "matrix.hpp"
 
 Matrix::Matrix() {
@@ -64,6 +65,7 @@ void Matrix::clear() {
 Matrix::~Matrix() {}
 
 ostream &operator<<(ostream &os, const Matrix &obj) {
+    os << fixed << setprecision(4);
     for (int r = 0; r < obj.row; ++r) {
         for (int c = 0; c < obj.col; ++c)
             os << obj.matrix[r][c] << "\t";
@@ -77,7 +79,7 @@ bool operator==(const Matrix &lhs, const Matrix &rhs) {
         return false;
     for (int r = 0; r < lhs.row; ++r)
         for (int c = 0; c < lhs.col; ++c)
-            if (lhs.matrix[r][c] - rhs.matrix[r][c] > 0.01)
+            if (lhs.matrix[r][c] - rhs.matrix[r][c] > Tolerance)
                 return false;
     return true;
 }

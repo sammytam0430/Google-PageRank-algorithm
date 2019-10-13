@@ -9,6 +9,8 @@
 
 using namespace std;
 
+constexpr double Tolerance = 0.001;
+
 class Matrix {
 private:
     vector<vector<double>> matrix;

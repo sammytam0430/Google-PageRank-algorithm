@@ -8,23 +8,32 @@
 #include <vector>
 #include "matrix.hpp"
 
-constexpr double Tolerance = 0.001;
 constexpr double ProbabilityFactor = 0.85;
-constexpr int NumOfPage = 4;
+
+int &getNumOfPage(int &);
+
+// Read Matrix File
+vector<double> readMatrixFile(int);
 
 // Get In and Out Degrees
-void getInOutDegrees(const Matrix m, vector<double> &in, vector<double> &out);
+void getInOutDegrees(const Matrix &, vector<double> &, vector<double> &, int);
 
 // Determine value of importance matrix (also known as left stochastic matrix or probability matrix)
-void getImportance(Matrix &m, vector<double> out);
+void getImportance(Matrix &, vector<double>, int);
 
 // Calculate value in transition matrix
-void getTransition(Matrix &transition, Matrix &teleportation);
+void getTransition(Matrix &, Matrix &, int);
 
-void markovProcess(Matrix &rank, Matrix &transition);
+// do markov process
+void markovProcess(Matrix &, Matrix &, int);
 
-double getSumOfRank(const Matrix &rank);
+// calculate the sum of rank
+double getSumOfRank(const Matrix &, int);
 
-void scaleRank(Matrix &rank, double sum);
+// scale rank so its elements sum to 1
+void scaleRank(Matrix &, double, int);
+
+// Format result to output
+void output(Matrix, int);
 
 #endif //ASSIGNMENT1_GOOGLEPAGERANK_HPP

@@ -8,46 +8,59 @@ using namespace std;
 
 int main() {
 
-    // Connectivity matrix G
-    Matrix connectivity = Matrix(vector<double>{0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0});
-    cout << connectivity << endl;
+    try {
+        int numOfPage = 0;
+        getNumOfPage(numOfPage);
 
-    // In degree
-    vector<double> inDeg = vector<double>();
-    // Out degree
-    vector<double> outDeg = vector<double>();
-    // Get In and Out Degrees
-    getInOutDegrees(connectivity, inDeg, outDeg);
+        vector<double> values = readMatrixFile(numOfPage);
 
-    // Importance matrix S
-    Matrix importance = connectivity;
-    // Determine value of importance matrix (also known as left stochastic matrix or probability matrix)
-    getImportance(importance, outDeg);
-    cout << importance << endl;
+        // Connectivity matrix G
+        Matrix connectivity = Matrix(values);
+        cout << "Connectivity Matrix =" << endl;
+        cout << connectivity << endl;
 
-    // Transition matrix M
-    Matrix transition = importance;
-    // Teleportation matrix Q
-    Matrix teleportation = Matrix(vector<double>(NumOfPage * NumOfPage, 1 / (double) NumOfPage));
-    // Calculate value in transition matrix
-    getTransition(transition, teleportation);
-    cout << transition << endl;
+        // In degree
+        vector<double> inDeg = vector<double>();
+        // Out degree
+        vector<double> outDeg = vector<double>();
+        // Get In and Out Degrees
+        getInOutDegrees(connectivity, inDeg, outDeg, numOfPage);
 
-    Matrix rank = Matrix(NumOfPage, 1);
+        // Importance matrix S
+        Matrix importance = connectivity;
+        // Determine value of importance matrix (also known as left stochastic matrix or probability matrix)
+        getImportance(importance, outDeg, numOfPage);
+        cout << "Importance (Pobability) Matrix =" << endl;
+        cout << importance << endl;
 
-    markovProcess(rank, transition);
+        // Transition matrix M
+        Matrix transition = importance;
+        // Teleportation matrix Q
+        Matrix teleportation = Matrix(vector<double>(numOfPage * numOfPage, 1.0 / numOfPage));
+        // Calculate value in transition matrix
+        getTransition(transition, teleportation, numOfPage);
 
-    double sum = getSumOfRank(rank);
+        cout << "Transition Matrix =" << endl;
+        cout << transition << endl;
 
-    scaleRank(rank, sum);
+        Matrix rank = Matrix(numOfPage, 1);
 
-    cout << rank << endl;
+        markovProcess(rank, transition, numOfPage);
 
-    cout << fixed << setprecision(2);
-    cout << "Page A: " << rank.get_value(0, 0) * 100 << "%" << endl;
-    cout << "Page B: " << rank.get_value(1, 0) * 100 << "%" << endl;
-    cout << "Page C: " << rank.get_value(2, 0) * 100 << "%" << endl;
-    cout << "Page D: " << rank.get_value(3, 0) * 100 << "%" << endl;
+        cout << "Rank =" << endl;
+        cout << rank << endl;
 
+        double sum = getSumOfRank(rank, numOfPage);
+
+        scaleRank(rank, sum, numOfPage);
+
+        cout << "Rank (scaled) =" << endl;
+        cout << rank << endl;
+
+        output(rank, numOfPage);
+
+    } catch (exception e) {
+        e.what();
+    }
     return 0;
 }
