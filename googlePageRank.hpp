@@ -34,6 +34,6 @@ double getSumOfRank(const Matrix &, int);
 void scaleRank(Matrix &, double, int);
 
 // Format result to output
-void output(Matrix, int);
+void output(const Matrix&, int);
 
 #endif //ASSIGNMENT1_GOOGLEPAGERANK_HPP

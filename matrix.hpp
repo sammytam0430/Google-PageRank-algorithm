@@ -19,11 +19,11 @@ private:
 public:
     Matrix();
 
-    Matrix(int);
+    explicit Matrix(int);
 
     Matrix(int, int);
 
-    Matrix(vector<double>);
+    explicit Matrix(vector<double>);
 
     void set_value(int, int, double);
 
@@ -49,7 +49,7 @@ public:
 
     Matrix &operator=(Matrix);
 
-    void matrixSwap(Matrix &, Matrix &);
+    static void matrixSwap(Matrix &, Matrix &);
 
     Matrix &operator+=(const Matrix &);
 

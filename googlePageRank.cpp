@@ -39,7 +39,7 @@ vector<double> readMatrixFile(int numOfPage) {
         while (getline(fin, line)) {
             istringstream iss;
             iss.str(line);
-            if (line.size() > 0) {
+            if (!line.empty()) {
                 for (int i = 0; i < numOfPage; ++i) {
                     iss >> d;
                     data.push_back(d);
@@ -113,7 +113,7 @@ void scaleRank(Matrix &rank, double sum, int numOfPage) {
     }
 }
 
-void output(Matrix rank, int numOfPage) {
+void output(const Matrix& rank, int numOfPage) {
     char p = 'A';
     cout << fixed << setprecision(2);
     for (int i = 0; i < numOfPage; ++i) {

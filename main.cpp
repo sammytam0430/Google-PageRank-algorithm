@@ -30,7 +30,7 @@ int main() {
         Matrix importance = connectivity;
         // Determine value of importance matrix (also known as left stochastic matrix or probability matrix)
         getImportance(importance, outDeg, numOfPage);
-        cout << "Importance (Pobability) Matrix =" << endl;
+        cout << "Importance (Probability) Matrix =" << endl;
         cout << importance << endl;
 
         // Transition matrix M
